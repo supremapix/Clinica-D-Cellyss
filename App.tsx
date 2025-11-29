@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { SERVICES, TESTIMONIALS, CONDITIONS, FAQS, PHONE_NUMBER, PHONE_DISPLAY, EMAIL_CONTACT, MAP_EMBED_URL, ALL_LOCATIONS, CITIES_RMC, NEIGHBORHOODS } from './constants';
@@ -14,7 +13,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const SectionTitle = ({ children, subtitle }: { children: React.ReactNode, subtitle?: string }) => (
+const SectionTitle = ({ children, subtitle }: { children?: React.ReactNode, subtitle?: string }) => (
   <div className="text-center mb-12">
     <h2 className="text-3xl md:text-4xl font-heading font-bold text-deepBlue mb-4 relative inline-block pb-2 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-midBlue rounded-full">
       {children}
@@ -31,8 +30,8 @@ const Button = ({
   className = '', 
   onClick 
 }: { 
-  children: React.ReactNode, 
-  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'glass', 
+  children?: React.ReactNode, 
+  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'glass' | 'customMid' | 'customOutline', 
   href?: string, 
   to?: string,
   className?: string,
@@ -44,7 +43,10 @@ const Button = ({
     secondary: "bg-gold text-white hover:bg-yellow-600 shadow-yellow-500/30",
     outline: "border-2 border-midBlue text-midBlue hover:bg-midBlue hover:text-white",
     whatsapp: "bg-[#25D366] text-white hover:bg-green-600 shadow-green-500/30",
-    glass: "bg-white/20 backdrop-blur-md border border-white/40 text-deepBlue hover:bg-white/40"
+    glass: "bg-white/20 backdrop-blur-md border border-white/40 text-deepBlue hover:bg-white/40",
+    // New variants based on request
+    customMid: "bg-midBlue text-white border-2 border-midBlue hover:bg-midBlue/90 hover:border-midBlue/90",
+    customOutline: "bg-transparent text-midBlue border-2 border-babyBlue hover:bg-babyBlue/10"
   };
 
   if (to) {
@@ -89,11 +91,27 @@ const Header = () => {
     { name: 'Contato', path: '/contato' },
   ];
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.style.display = 'none';
+    const fallback = document.getElementById('logo-fallback');
+    if (fallback) fallback.classList.remove('hidden');
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-2' : 'bg-white py-4 shadow-sm'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3 group">
-          <img src="https://decellyss.com.br/assets/images/fisioterapia-regenerativa-transforme-sua-sade-na-dcellyss-100x100.png" alt="Logo D'Cellyss Fisioterapia Curitiba" className="h-12 w-auto group-hover:scale-105 transition-transform" />
+           {/* Fallback Icon if image fails */}
+           <div id="logo-fallback" className="hidden flex items-center justify-center w-12 h-12 bg-babyBlue rounded-full text-deepBlue">
+             <i className="fas fa-heart-pulse text-2xl"></i>
+           </div>
+           
+           <img 
+            src="https://decellyss.com.br/assets/images/fisioterapia-regenerativa-transforme-sua-sade-na-dcellyss-100x100.png" 
+            alt="Logo D'Cellyss Fisioterapia Curitiba" 
+            className="h-12 w-auto group-hover:scale-105 transition-transform" 
+            onError={handleImageError}
+          />
           <div className="flex flex-col">
             <span className="font-heading font-bold text-xl md:text-2xl text-deepBlue leading-none">D'Cellyss</span>
             <span className="text-[10px] uppercase tracking-widest text-midBlue hidden md:block">Fisioterapia & Ozonioterapia</span>
@@ -255,9 +273,9 @@ const Hero = () => {
             <span className="text-deepBlue font-semibold text-xs tracking-wider uppercase">Fisioterapia em Curitiba - Fazendinha</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-deepBlue leading-[1.1] mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-deepBlue leading-[1.1] mb-6 drop-shadow-sm">
             Fisioterapia Regenerativa e <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-midBlue to-celestial">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-babyBlue to-celestial drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.1)]">
               Ozonioterapia.
             </span>
           </h1>
@@ -267,10 +285,10 @@ const Hero = () => {
           </h2>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Button variant="primary" className="shadow-xl shadow-blue-500/20 w-full sm:w-auto" href={`https://wa.me/${PHONE_NUMBER}?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita%20de%20fisioterapia`}>
+            <Button variant="customMid" className="shadow-xl shadow-blue-500/20 w-full sm:w-auto" href={`https://wa.me/${PHONE_NUMBER}?text=Olá,%20gostaria%20de%20agendar%20uma%20avaliação%20gratuita%20de%20fisioterapia`}>
               AGENDAR AVALIAÇÃO GRATUITA
             </Button>
-            <Button variant="outline" className="backdrop-blur-sm w-full sm:w-auto" to="/servicos">
+            <Button variant="customOutline" className="backdrop-blur-sm w-full sm:w-auto" to="/servicos">
               Ver Tratamentos
             </Button>
           </div>
@@ -297,7 +315,7 @@ const Hero = () => {
           <div className="relative w-full max-w-[320px] lg:max-w-[450px] aspect-[4/5] flex items-center justify-center">
              <div className="absolute w-[120%] h-[120%] border border-midBlue/10 rounded-full animate-spin-slow"></div>
              <div className="absolute w-[100%] h-[100%] border border-dashed border-midBlue/20 rounded-full"></div>
-             <div className="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white z-10 bg-white">
+             <div className="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white z-10 bg-white animate-energy-wave">
                 <img 
                   src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800" 
                   alt="Tratamento de Dor na Coluna em Curitiba" 
@@ -325,6 +343,64 @@ const Hero = () => {
                </div>
                <p className="text-[10px] text-gray-500 mt-1">Recuperação Acelerada</p>
              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const TestimonialsCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <SectionTitle subtitle="A satisfação de quem já recuperou a saúde conosco.">Depoimentos</SectionTitle>
+        
+        <div className="max-w-4xl mx-auto relative min-h-[300px]">
+          {TESTIMONIALS.map((t, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <div 
+                key={t.id} 
+                className={`absolute top-0 left-0 w-full transition-all duration-700 ease-in-out transform ${
+                  isActive ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95 pointer-events-none'
+                }`}
+              >
+                <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-1 hover:shadow-2xl hover:border-gold/50 transition-all duration-300 group">
+                  <div className="flex text-gold mb-6 text-xl justify-center">
+                    {[...Array(t.rating)].map((_, i) => <i key={i} className="fas fa-star drop-shadow-md text-yellow-400"></i>)}
+                  </div>
+                  <p className="text-gray-600 italic mb-8 text-xl md:text-2xl text-center leading-relaxed">"{t.text}"</p>
+                  <div className="flex flex-col items-center">
+                     <div className="w-16 h-16 bg-gradient-to-br from-midBlue to-deepBlue rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-3">
+                       {t.name.charAt(0)}
+                     </div>
+                     <p className="font-bold text-deepBlue text-lg">{t.name}</p>
+                     <p className="text-sm text-midBlue font-medium uppercase tracking-wide">{t.treatment}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          
+          <div className="flex justify-center gap-2 absolute -bottom-12 w-full">
+            {TESTIMONIALS.map((_, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={`h-2 rounded-full transition-all duration-300 ${idx === activeIndex ? 'w-8 bg-midBlue' : 'w-2 bg-gray-300 hover:bg-midBlue/50'}`}
+                aria-label={`Ver depoimento ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -440,9 +516,9 @@ const TestimonialsPage = () => (
       <SectionTitle subtitle="A satisfação de quem já recuperou a saúde conosco.">Depoimentos</SectionTitle>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {TESTIMONIALS.map(t => (
-          <div key={t.id} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+          <div key={t.id} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:-translate-y-1 hover:shadow-2xl hover:border-gold/50 transition-all duration-300">
             <div className="flex text-gold mb-4 text-lg">
-              {[...Array(t.rating)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+              {[...Array(t.rating)].map((_, i) => <i key={i} className="fas fa-star text-yellow-400"></i>)}
             </div>
             <p className="text-gray-600 italic mb-6 text-lg">"{t.text}"</p>
             <div className="flex items-center gap-4">
@@ -646,6 +722,8 @@ const HomePage = () => (
       </div>
     </section>
     
+    <TestimonialsCarousel />
+
     <ContactForm />
   </>
 );

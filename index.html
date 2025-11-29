@@ -52,6 +52,7 @@
               'float-delayed': 'float 6s ease-in-out 3s infinite',
               'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'spin-slow': 'spin 12s linear infinite',
+              'energy-wave': 'energyWave 4s ease-in-out infinite',
             },
             keyframes: {
               beat: {
@@ -65,6 +66,10 @@
               float: {
                 '0%, 100%': { transform: 'translateY(0)' },
                 '50%': { transform: 'translateY(-20px)' },
+              },
+              energyWave: {
+                '0%, 100%': { boxShadow: '0 0 0 0 rgba(135, 206, 235, 0.4)' },
+                '50%': { boxShadow: '0 0 40px 10px rgba(135, 206, 235, 0.2)' },
               }
             }
           }
@@ -178,7 +183,7 @@
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6"
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^6.22.3"
   }
 }
 </script>
