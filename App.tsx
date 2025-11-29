@@ -703,7 +703,7 @@ const HomePage = () => (
       <div className="container mx-auto px-4">
          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-               <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800" alt="Fisioterapia Curitiba" className="rounded-3xl shadow-xl" />
+               <img src="https://decellyss.com.br/assets/images/esttica-avanada-e-fisioterapia-na-dcellyss-curitiba-658x651.png" alt="Fisioterapia Curitiba" className="rounded-3xl shadow-xl" />
             </div>
             <div className="order-1 md:order-2">
                <h2 className="text-3xl font-heading font-bold text-deepBlue mb-6">Tratamentos de Alta Performance</h2>
