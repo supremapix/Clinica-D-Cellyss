@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { SERVICES, TESTIMONIALS, CONDITIONS, FAQS, PHONE_NUMBER, PHONE_DISPLAY, EMAIL_CONTACT, MAP_EMBED_URL, ALL_LOCATIONS, CITIES_RMC, NEIGHBORHOODS } from './constants';
@@ -44,7 +45,6 @@ const Button = ({
     outline: "border-2 border-midBlue text-midBlue hover:bg-midBlue hover:text-white",
     whatsapp: "bg-[#25D366] text-white hover:bg-green-600 shadow-green-500/30",
     glass: "bg-white/20 backdrop-blur-md border border-white/40 text-deepBlue hover:bg-white/40",
-    // New variants based on request
     customMid: "bg-midBlue text-white border-2 border-midBlue hover:bg-midBlue/90 hover:border-midBlue/90",
     customOutline: "bg-transparent text-midBlue border-2 border-babyBlue hover:bg-babyBlue/10"
   };
@@ -91,27 +91,13 @@ const Header = () => {
     { name: 'Contato', path: '/contato' },
   ];
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.style.display = 'none';
-    const fallback = document.getElementById('logo-fallback');
-    if (fallback) fallback.classList.remove('hidden');
-  };
-
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-md py-2' : 'bg-white py-4 shadow-sm'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3 group">
-           {/* Fallback Icon if image fails */}
-           <div id="logo-fallback" className="hidden flex items-center justify-center w-12 h-12 bg-babyBlue rounded-full text-deepBlue">
-             <i className="fas fa-heart-pulse text-2xl"></i>
+           <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-babyBlue to-celestial rounded-full text-deepBlue shadow-md">
+             <i className="fas fa-heart-pulse text-2xl animate-pulse-slow"></i>
            </div>
-           
-           <img 
-            src="https://decellyss.com.br/assets/images/fisioterapia-regenerativa-transforme-sua-sade-na-dcellyss-100x100.png" 
-            alt="Logo D'Cellyss Fisioterapia Curitiba" 
-            className="h-12 w-auto group-hover:scale-105 transition-transform" 
-            onError={handleImageError}
-          />
           <div className="flex flex-col">
             <span className="font-heading font-bold text-xl md:text-2xl text-deepBlue leading-none">D'Cellyss</span>
             <span className="text-[10px] uppercase tracking-widest text-midBlue hidden md:block">Fisioterapia & Ozonioterapia</span>
@@ -158,7 +144,9 @@ const Footer = () => (
     <div className="container mx-auto px-4">
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <div>
-          <h3 className="text-2xl font-bold font-heading mb-4 text-white">D'Cellyss</h3>
+          <h3 className="text-2xl font-bold font-heading mb-4 text-white flex items-center gap-2">
+             <i className="fas fa-heart-pulse text-midBlue"></i> D'Cellyss
+          </h3>
           <p className="text-gray-400 text-sm mb-6 leading-relaxed">
             Clínica especializada em Fisioterapia Regenerativa e Ozonioterapia em Curitiba. Nossa missão é proporcionar alívio da dor e qualidade de vida através de tratamentos naturais e tecnologia de ponta.
           </p>
@@ -315,16 +303,16 @@ const Hero = () => {
           <div className="relative w-full max-w-[320px] lg:max-w-[450px] aspect-[4/5] flex items-center justify-center">
              <div className="absolute w-[120%] h-[120%] border border-midBlue/10 rounded-full animate-spin-slow"></div>
              <div className="absolute w-[100%] h-[100%] border border-dashed border-midBlue/20 rounded-full"></div>
-             <div className="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white z-10 bg-white animate-energy-wave">
-                <img 
-                  src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800" 
-                  alt="Tratamento de Dor na Coluna em Curitiba" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-[25%] left-[50%] -translate-x-1/2 w-12 h-12 lg:w-16 lg:h-16 pointer-events-none">
-                   <div className="pain-point w-full h-full"></div>
-                   <div className="tech-ring"></div>
+             <div className="relative w-full h-full rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white z-10 bg-white animate-energy-wave flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
+                {/* ICONE SUBSTITUINDO A IMAGEM PRINCIPAL */}
+                <div className="relative z-10 text-center">
+                  <i className="fas fa-user-injured text-[150px] md:text-[200px] text-midBlue opacity-80 drop-shadow-xl animate-pulse-slow"></i>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="pain-point w-32 h-32 md:w-48 md:h-48"></div>
+                    <div className="tech-ring w-40 h-40 md:w-60 md:h-60"></div>
+                  </div>
                 </div>
+
                 <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-deepBlue/80 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 lg:bottom-6 lg:left-6 text-white z-20">
                   <p className="font-heading font-bold text-lg lg:text-xl">Alívio Imediato</p>
@@ -422,12 +410,17 @@ const ServicesPage = () => (
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {SERVICES.map((service) => (
           <article key={service.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-            <div className="relative h-56 overflow-hidden">
-              <img src={service.image} alt={`Tratamento de ${service.title} em Curitiba`} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-              <div className="absolute top-4 right-4 bg-white/90 p-2 rounded-full shadow-md text-midBlue">
-                <i className={`fas ${service.icon} text-xl`}></i>
-              </div>
+            {/* SUBSTITUIÇÃO DE IMAGEM POR ICONE ESTILIZADO */}
+            <div className="relative h-56 overflow-hidden bg-gradient-to-br from-babyBlue/30 via-white to-babyBlue/10 flex items-center justify-center group-hover:bg-babyBlue/40 transition-colors duration-500">
+               <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#4A90E2 2px, transparent 2px)', backgroundSize: '20px 20px' }}></div>
+               <i className={`fas ${service.icon} text-8xl text-midBlue opacity-80 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 drop-shadow-md`}></i>
+               {service.isNew && (
+                 <div className="absolute top-4 right-4 bg-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow-md animate-pulse">
+                   NOVO
+                 </div>
+               )}
             </div>
+            
             <div className="p-6 flex-grow flex flex-col">
               <h3 className="text-xl font-bold text-deepBlue mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-4 text-sm leading-relaxed">{service.description}</p>
@@ -476,10 +469,16 @@ const AboutPage = () => (
            </div>
         </div>
         <div className="relative">
-          <img src="https://decellyss.com.br/assets/images/ozonioterapia-e-bem-estar-dcellyss-fazendinha-curitiba-658x651.png" alt="Equipe D'Cellyss" className="rounded-3xl shadow-2xl border-4 border-white" />
-          <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
-             <p className="font-heading font-bold text-deepBlue text-xl">Dra. Célia</p>
-             <p className="text-midBlue">Responsável Técnica</p>
+          {/* SUBSTITUIÇÃO DE IMAGEM POR ICONE ESTILIZADO */}
+          <div className="w-full h-[400px] bg-gradient-to-br from-gray-100 to-white rounded-3xl shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center p-8 relative overflow-hidden">
+             <div className="absolute top-0 right-0 w-32 h-32 bg-midBlue/10 rounded-full blur-2xl"></div>
+             <div className="relative z-10">
+                <i className="fas fa-user-doctor text-9xl text-midBlue mb-6 drop-shadow-lg"></i>
+                <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-md inline-block">
+                  <p className="font-heading font-bold text-deepBlue text-xl">Dra. Célia</p>
+                  <p className="text-midBlue text-sm">Fisioterapeuta Especialista</p>
+                </div>
+             </div>
           </div>
         </div>
       </div>
@@ -703,7 +702,16 @@ const HomePage = () => (
       <div className="container mx-auto px-4">
          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-               <img src="https://decellyss.com.br/assets/images/esttica-avanada-e-fisioterapia-na-dcellyss-curitiba-658x651.png" alt="Fisioterapia Curitiba" className="rounded-3xl shadow-xl" />
+               {/* SUBSTITUIÇÃO DE IMAGEM POR ICONE ESTILIZADO */}
+               <div className="w-full h-[400px] bg-white rounded-3xl shadow-xl border border-gray-100 flex items-center justify-center relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-white opacity-80"></div>
+                  <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-midBlue/10 rounded-full blur-3xl"></div>
+                  <div className="relative z-10 flex flex-col items-center text-center p-8">
+                     <i className="fas fa-stethoscope text-8xl text-midBlue mb-6 drop-shadow-md transform group-hover:rotate-12 transition-transform duration-500"></i>
+                     <h3 className="text-2xl font-heading font-bold text-deepBlue">Clínica Completa</h3>
+                     <p className="text-gray-500 mt-2">Tecnologia e conforto para você</p>
+                  </div>
+               </div>
             </div>
             <div className="order-1 md:order-2">
                <h2 className="text-3xl font-heading font-bold text-deepBlue mb-6">Tratamentos de Alta Performance</h2>

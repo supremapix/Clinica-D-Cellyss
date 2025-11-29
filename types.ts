@@ -1,9 +1,10 @@
+
 export interface Service {
   id: string;
   title: string;
   description: string;
   benefits: string[];
-  image: string;
+  image?: string;
   icon: string;
   isNew?: boolean;
 }
