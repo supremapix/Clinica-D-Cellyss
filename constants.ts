@@ -1,4 +1,5 @@
 
+
 import { Service, Testimonial, LocationData, LocationType } from './types';
 
 export const PHONE_NUMBER = '5541999163976'; // Format for API
@@ -13,8 +14,8 @@ export const SERVICES: Service[] = [
     title: 'Fisioterapia Regenerativa',
     description: 'Tratamento avançado focado na causa raiz da dor. Utilizamos tecnologias que aceleram a biologia natural do corpo para reparar tecidos, tendões e articulações desgastadas, evitando cirurgias desnecessárias.',
     benefits: ['Ideal para Hérnia de Disco e Artrose', 'Regeneração de cartilagem e tendões', 'Alívio imediato de dores crônicas'],
-    // Official Image
-    image: 'https://decellyss.com.br/assets/images/esttica-avanada-e-fisioterapia-na-dcellyss-curitiba-658x651.png', 
+    // Imagem profissional de Fisioterapia/Coluna
+    image: 'https://images.unsplash.com/photo-1576091160550-217358c7e618?auto=format&fit=crop&q=80&w=800', 
     icon: 'fa-heart-pulse'
   },
   {
@@ -22,8 +23,8 @@ export const SERVICES: Service[] = [
     title: 'Ozonioterapia Medicinal',
     description: 'O poder do Ozônio Medicinal para combater inflamações severas e fortalecer a imunidade. Tratamento integrativo padrão ouro para dores na coluna, fibromialgia e feridas de difícil cicatrização.',
     benefits: ['Potente ação anti-inflamatória e analgésica', 'Combate vírus, fungos e bactérias', 'Melhora a circulação e oxigenação celular'],
-    // Official Image
-    image: 'https://decellyss.com.br/assets/images/ozonioterapia-e-bem-estar-dcellyss-fazendinha-curitiba-658x651.png',
+    // Imagem Clínica/Clean para Ozonioterapia
+    image: 'https://images.unsplash.com/photo-1628315183492-4f33668b556f?auto=format&fit=crop&q=80&w=800',
     icon: 'fa-lungs'
   },
   {
@@ -31,8 +32,8 @@ export const SERVICES: Service[] = [
     title: 'Terapia Neural',
     description: 'Técnica alemã que reequilibra o sistema nervoso autônomo. Indicada para quem sofre de dores persistentes que não respondem a tratamentos convencionais, ansiedade, insônia e cicatrizes dolorosas.',
     benefits: ['Desbloqueio de interferências nervosas', 'Tratamento eficaz para enxaquecas e cicatrizes', 'Regulação do sono e estresse'],
-    // Official Image
-    image: 'https://decellyss.com.br/assets/images/ozonioterapia-e-bem-estar-dcellyss-fazendinha-terapia-neural-curitiba-658x651.png',
+    // Imagem focada em nervos/coluna/cuidado manual
+    image: 'https://images.unsplash.com/photo-1600334019640-51026cf301d3?auto=format&fit=crop&q=80&w=800',
     icon: 'fa-brain'
   },
   {
@@ -40,8 +41,8 @@ export const SERVICES: Service[] = [
     title: 'Bio Aquecedor Photon Dome II',
     description: 'Tecnologia japonesa de emissão de raios infravermelhos longos. Promove uma desintoxicação profunda, acelera o metabolismo e auxilia no emagrecimento saudável e redução de medidas.',
     benefits: ['Detoxificação e queima calórica', 'Redução de ácido lático e dores musculares', 'Melhora da elasticidade da pele'],
-    // Official Image
-    image: 'https://decellyss.com.br/assets/images/bio-aquecedor-photon-dome-ii-ltima-palavra-em-aparelho-esttico-venha-conhecer-essa-tecnologia-aqui-na-dcellyss-658x651.png',
+    // Imagem Estética Tecnológica
+    image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=800',
     icon: 'fa-solar-panel',
     isNew: true
   },
@@ -50,7 +51,7 @@ export const SERVICES: Service[] = [
     title: 'Drenagem Linfática Manual',
     description: 'Método comprovado para eliminar a retenção de líquidos, reduzir o inchaço corporal e combater a celulite. Essencial no pós-operatório de cirurgias plásticas para uma recuperação rápida.',
     benefits: ['Eliminação de toxinas e inchaço', 'Recuperação acelerada de pós-operatório', 'Redução visível de medidas'],
-    // Keeping high quality placeholder
+    // Imagem Massagem/Drenagem
     image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&q=80&w=800',
     icon: 'fa-water'
   }
@@ -87,7 +88,7 @@ export const CONDITIONS = [
   { name: "Dor no Nervo Ciático", icon: "fa-bolt" },
   { name: "Artrose e Desgaste", icon: "fa-bone" },
   { name: "Fibromialgia", icon: "fa-person-cane" },
-  { name: "Dores na Coluna (Lombar/Cervical)", icon: "fa-spine" }, // Note: FontAwesome needs pro for spine usually, fallback handled
+  { name: "Dores na Coluna (Lombar/Cervical)", icon: "fa-x-ray" }, 
   { name: "Tendinites e Bursites", icon: "fa-fire" },
   { name: "Ansiedade e Insônia", icon: "fa-cloud-moon" },
   { name: "Enxaqueca Crônica", icon: "fa-head-side-virus" },
